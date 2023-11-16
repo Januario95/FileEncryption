@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>File Information</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        form {
+            margin-top: 50px;
+        }
+        .file-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .file-info {
+            margin-top: 10px;
+        }
+        .file-info table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form }}
+        {% csrf_token %}
+        <input type="submit" value="Check Info">
+    </form>
+    
+    <div class="file-info">
+        {% if file_is_processed %}
+            <table>
+                <tr>
+                    <th>Filename</th>
+                    <td>{{ data.name }}</td>
+                </tr>
+                <tr>
+                    <th>Creation Time</th>
+                    <td>{{ data.creation_time }}</td>
+                </tr>
+                <tr>
+                    <th>Last Access Time</th>
+                    <td>{{ data.last_access_time }}</td>
+                </tr>
+                <tr>
+                    <th>File mode</th>
+                    <td>{{ data.file_mode }}</td>
+                </tr>
+                <tr>
+                    <th>Size</th>
+                    <td>{{ data.size }}</td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'jquery-3.6.1.min.js' %}"></script>
+    <script></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

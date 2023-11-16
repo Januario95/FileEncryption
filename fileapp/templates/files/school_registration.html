@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Schol Registration</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .post-form  {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .post-form {
+            
+        }
+        .not-supported {
+            color: red;
+            fontsize: 15px;
+        }
+        .errorlist li {
+            font-style: italic;
+            color: red;
+        }
+        input {
+            text-align: center;
+        }
+        .subjects {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center;
+        }
+        .subject {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-content: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .subject-code {
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        .course-registration {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="course-registration">
+        <div class="course-reg">
+            <form method="post" class="post-form" enctype="multipart/form-data">
+                {{ form }}
+                {% csrf_token %}
+                </br>
+                <input type="submit" value="Download">
+            </form>
+            
+            <div class="uploaded-file">    
+                <div class="subjects">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>School name</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for school in schools %}
+                                <tr class="school">
+                                    <td>{{ school.name }}</td>
+                                    <td>{{ school.location }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            
+                {% if regi_error %}
+                    <span style="color: red; font-style: italic;">School is already registered</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    </script>
+{% endblock %}
+
+
+

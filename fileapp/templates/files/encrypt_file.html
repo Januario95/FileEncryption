@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>File Encryption</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .post-form  {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .post-form {
+            
+        }
+        .not-supported {
+            color: red;
+            fontsize: 15px;
+        }
+        .errorlist li {
+            font-style: italic;
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <form method="post" class="post-form" enctype="multipart/form-data">
+        {{ form }}
+        {% csrf_token %}
+        </br>
+        <input type="submit" value="Encrypt">
+    </form>
+    
+    <div class="uploaded-file">        
+        {% if filetype %}
+            <span class="not-supported">{{ filetype }}</span>
+        {% endif %}
+    
+        {% if uploaded_file_url %}
+            <p>Download File: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        let pasword_input = document.querySelector("#id_password");
+    
+        function randomWord() {
+            return Math.round(Math.random() * 67);
+        }
+        
+        generateSecurePassword();
+        function generateSecurePassword() {
+            let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&@" // "\()*+,-./:;<=>?[\\]^_{|}~";
+            let password = "";
+            for (let i = 0; i < 8; i++) {
+            let index = randomWord();
+                password += letters[index];
+            }
+            pasword_input.value = password;
+        }
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

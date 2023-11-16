@@ -1,0 +1,29 @@
+{
+    "subjects": [
+        {
+            "name": "Math",
+            "code": "AB24",
+            "course_hours": "25.5"
+        },
+        {
+            "name": "English",
+            "code": "AB23",
+            "course_hours": "25.5"
+        },
+        {
+            "name": "Physics",
+            "code": "AB21",
+            "course_hours": "25.5"
+        },
+        {
+            "name": "OOP",
+            "code": "AB20",
+            "course_hours": "25.5"
+        },
+        {
+            "name": "Financial Management",
+            "code": "AB33",
+            "course_hours": "25.5"
+        }
+    ]
+}

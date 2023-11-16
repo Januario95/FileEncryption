@@ -1,0 +1,12 @@
+{
+    "schools": [
+        {
+            "name": "Universiti Teknologi Petronas",
+            "location": "Seri Iskandar, Perak, Malaysia"
+        },
+        {
+            "name": "Universidade Eduardo Mondlane",
+            "location": "Maputo"
+        }
+    ]
+}

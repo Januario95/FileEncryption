@@ -1,0 +1,120 @@
+{% load static %}
+<html DOCTYPE>
+<html>
+<head>
+    <meta charset="utf-8">
+    {% block title %}
+        <title></title>
+    {% endblock %}
+    <style>
+        body {
+            background-image: url("{% static "background.jpg" %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        } 
+        .links a {
+            color: black;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            padding: 4px;
+            border-radius: 4px;
+            margin: 0px 10px 0px 10px;
+        }
+    </style>
+    {% block style %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <div class="links">
+            <a class="zip-folder" href='{% url "fileapp:download_zip_folder" %}'>
+                Download zip folder
+            </a>
+            <a href="{% url 'fileapp:password_generator' %}">Password Generator</a>
+            <a class="zip-folder" href='{% url "fileapp:download_youtube_videos" %}'>
+                Download YOUTUBE videos
+            </a>
+            <a class="encrypt-file" href='{% url "fileapp:encrypt_file" %}'>
+                Encrypt File
+            </a>
+            <a class="file-info" href='{% url "fileapp:file_information" %}'>
+                File Information
+            </a>
+            <a class="file-to-xml" href='{% url "fileapp:file_to_xml" %}'>
+                File to XML
+            </a>
+            <a class="course-reg" href="{% url 'fileapp:course_registration' %}">
+                Course Registration
+            </a>
+            <a class="stud-reg" href="{% url 'fileapp:student_registration' %}">
+                Student Registration
+            </a>
+        </div>
+        <div class="main-body">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    
+    <script>
+        let zip_folder = document.querySelector(".zip-folder");
+        let encrypt_file = document.querySelector(".encrypt-file");
+        let file_info = document.querySelector(".file-info");
+        let file_to_xml = document.querySelector(".file-to-xml");
+
+        file_info.addEventListener('click', e => {
+            // alert(window.location.href);
+            if (window.location.href === 'http://www.localhost:8000/file_information/') {
+                console.log('EQUAL');
+                setTimeout(() => {
+                    file_info.style.backgroundColor = '#ccc';
+                }, 500);
+            }
+            // e.preventDefault();
+            
+        });
+    </script>
+    {% block javascript %}
+    {% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

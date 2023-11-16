@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Student Registration</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .post-form  {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .post-form {
+            
+        }
+        .not-supported {
+            color: red;
+            fontsize: 15px;
+        }
+        .errorlist li {
+            font-style: italic;
+            color: red;
+        }
+        input {
+            text-align: center;
+        }
+        .subjects {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-content: center;
+        }
+        .subject {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-content: center;
+            border-bottom: 1px solid #ccc;
+        }
+        .subject-code {
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"], select {
+            width: 200px;
+            height: 33px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+        }
+        .students-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <div class="students-page">
+        <form method="post" class="post-form" enctype="multipart/form-data">
+            <label for="first-name">First name</label>
+            <input type="text" id="first_name_id" name="first-name" value="Januario" required>
+            <label for="last-name">Last name</label>
+            <input type="text" id="last_name_id" name="last-name" value="Cipriano" required>
+            <label for="email">Email</label>
+            <input type="email" id="email_id" name="email" value="januario@example.com" required>
+            <label for="date-of-birth">date-of-birth</label>
+            <input type="date" id="date_of_birth_id" name="date-of-birth" value="1995-01-07" required>
+            <select name="school">
+                {% for school in schools %}
+                    <option>{{ school.name }}</option>
+                {% endfor %}
+            </select>
+            <div name="subject">
+                {% for subject in subjects  %}
+                    <label for="subject">{{ subject.name }}</label>
+                    <input type="checkbox" id="{{ subject.code }}" name="{{ subject.code }}">
+                {% endfor %}
+            </div>
+            {% csrf_token %}
+            </br>
+            <input type="submit" value="Download">
+        </form>
+        
+        <div class="uploaded-file">    
+            <div class="students">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Email</th>
+                            <th>Date of birth</th>
+                            <th>School</th>
+                            <th>Courses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td>{{ student.first_name }}</td>
+                                <td>{{ student.last_name }}</td>
+                                <td>{{ student.email }}</td>
+                                <td>{{ student.date_of_birth|date:"M d, Y" }}</td>
+                                <td>{{ student.school.name }}</td>
+                                <td colspan="2">
+                                    <ol>
+                                        {% for subject in student.subjects %}
+                                            <li>
+                                                <a href="{% url 'fileapp:course_details' subject.code %}">{{ subject.name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ol>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+            </div>
+        
+            {% if regi_error %}
+                <span style="color: red; font-style: italic;">Student is already registered</span>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    </script>
+{% endblock %}
+
+
+

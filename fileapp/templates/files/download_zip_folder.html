@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}
+    <title>Download Zip Folders</title>
+{% endblock %}
+
+{% block style %}
+    <style>
+        .post-form  {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .post-form {
+            
+        }
+        .not-supported {
+            color: red;
+            fontsize: 15px;
+        }
+        .errorlist li {
+            font-style: italic;
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+        <form method="post" class="post-form" enctype="multipart/form-data">
+            {{ form }}
+            {% csrf_token %}
+            </br>
+            <input type="submit" value="Download">
+        </form>
+        
+        <div class="uploaded-file">
+            <p>{{ 7|apnumber }}        
+            {% if filetype %}
+                <span class="not-supported">{{ filetype }}</span>
+            {% endif %}
+        
+            {% if uploaded_file_url %}
+                <p>Download File: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+    </script>
+{% endblock %}
+
+
+
